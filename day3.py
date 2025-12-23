@@ -20,16 +20,17 @@ def total_output_joltage_2(battery_string, num_digits):
     batteries = battery_string.split("\n")
     total_output_joltage = 0
     for bank in batteries:
-        digits = [0]*num_digits
+        digits = ""
         first_index = 0
         for i in range(num_digits):
             bank_to_check = bank[first_index:i+1-num_digits] if i != num_digits-1 else bank[first_index:]
             for power in range(9,0,-1):
-                if str(power) in bank_to_check:
-                    first_index += bank_to_check.index(str(power)) + 1
-                    digits[i] = power
+                power = str(power)
+                if power in bank_to_check:
+                    first_index += bank_to_check.index(power) + 1
+                    digits += power
                     break
-        total_output_joltage += int(''.join(map(str, digits)))
+        total_output_joltage += int(digits)
     return total_output_joltage
 
 battery_string = """8221441533335523934234684734333842352334638213344455472314354533231333442559833436143312222328593824
